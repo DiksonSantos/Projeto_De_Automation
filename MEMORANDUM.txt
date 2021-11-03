@@ -1,0 +1,9 @@
+Na presente data 30-10-21
+Os servidores de e-mail (tanto Gmail quanto Outlook) não estão aceitando o envio de emails por algoritmos
+,os quais dependem de desativar a segurança para APPs menos seguros. 
+O meu email Google principal, agora possui autenticação de Duas Etapas (tornando assim impossivel logar nele automaticamente com um algoritmo, pois ele exige uma etapa/confirmação a partir do meu celular.) 
+
+Com isso estou dando por encerrado (pelo menos momentaneamente ) Este projeto de automação de tarefas. 
+
+O proximo Projeto ( Se excluirmos as ultimas etapas que são referentes á envio de e-mail etc...) Podem ser uteis  para  empresas/escritórios ou setores de compra divérsos. Pois é um algoritmo que usa Selenium para 'Pechinchar' preços de produtos na internet. 
+

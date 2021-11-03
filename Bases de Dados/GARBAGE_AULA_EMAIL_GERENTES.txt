@@ -1,0 +1,61 @@
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from senhas import key
+from email import encoders
+# Attach Anexo:
+from email.mime.base import MIMEBase
+
+
+mail_body = 'texto do email em si'
+
+# Sessão Para Anexar um XLSX
+part = MIMEBase('application', "octet-stream")
+#part.set_payload(open(pathlib.Path.cwd() / caminho_do_Backup / loja / f'{dia_indicador.month}_{dia_indicador.day}_{loja}.xlsx' , "rb").read())
+part.set_payload(open("Vendas.xlsx", "rb").read())
+encoders.encode_base64(part)
+part.add_header('Content-Disposition', 'attachment; filename="Vendas.xlsx')
+message.attach(part)
+
+nome = emails.loc[emails['Loja']==loja,'Gerente'].values[0] 
+
+# Variavel 'html' com o conteudo do e-mail:
+#'loja' é uma variavel definida lá em cima. Contem -> string 'Norte Shopping'
+# .values[0] -> Tras apenas o valor, e não a tabela que o contém. 
+mail = emails.loc[emails['Loja']==loja,'E-mail'].values[0] 
+
+
+# conexão com os servidores do google
+smtp_ssl_host = 'smtp.gmail.com'
+smtp_ssl_port = 465
+
+# username ou email para logar no servidor GOOGLE:
+#senha = str(input("Senha do E-mail: "))
+username = 'dikson.enterprise@gmail.com'
+password = key
+
+# Origem:
+from_addr = 'dikson.enterprise@gmail.com'
+
+# Destino
+# Devemos filtrar a tabela p/ Pegar o Email do Gerente daquele Shopping
+to_addrs = [mail, 'dikson_santos@outlook.com', 'diksonnn@gmail.com']
+
+
+message = MIMEText(mail_body, 'html')
+
+# Assunto do e-mail:
+message['subject'] = f'OnePage Dia {dia_indicador.day}/{dia_indicador.month} - Loja {loja}'
+# Variavel com a Origem dos E-mails:
+message['from'] = from_addr
+# Variavel com os Destinos:
+message['to'] = ', '.join(to_addrs)
+
+# conectaremos de forma segura usando SSL
+server = smtplib.SMTP_SSL(smtp_ssl_host, smtp_ssl_port)
+# para interagir com um servidor externo precisaremos
+# fazer login nele
+server.login(username, password)
+server.sendmail(from_addr, to_addrs, message.as_string())
+
+server.quit()
